@@ -62,7 +62,7 @@ def optimal_length(points) -> float:
 
 
 if __name__ == "__main__":
-    rng = random.Random(2024)                      # semilla fija: los resultados se repiten
+    rng = random.Random(2024)                     
     rows = []
     for _ in range(N_INSTANCES):
         points = [(rng.uniform(0, 100), rng.uniform(0, 100)) for _ in range(N_CITIES)]
