@@ -16,7 +16,6 @@ def tour_length(points, route) -> float:
 
 
 def two_opt_move(route: list[int], i: int, k: int) -> list[int]:
-    """Invierte route[i..k]: quita las aristas (i-1, i) y (k, k+1)."""
     return route[:i] + route[i:k + 1][::-1] + route[k + 1:]
 
 
@@ -32,8 +31,6 @@ SCHEDULES = {"Lineal": linear_schedule, "Exponencial": exponential_schedule}
 
 
 def simulated_annealing(points, initial, schedule, n_iter, seed):
-    """SA de p2.py. Devuelve (mejor recorrido, historial del costo actual, historial del
-    mejor costo, historial de la temperatura)."""
     n = len(initial)
     rng = random.Random(seed)
     current, best = initial[:], initial[:]
@@ -59,7 +56,6 @@ def simulated_annealing(points, initial, schedule, n_iter, seed):
 
 
 def optimal_length(points) -> float:
-    """Fuerza bruta sobre todos los recorridos que empiezan en la ciudad 0 ((n-1)! recorridos)."""
     n = len(points)
     D = [[math.dist(a, b) for b in points] for a in points]
     best = float("inf")
@@ -85,7 +81,6 @@ if __name__ == "__main__":
     print(f"{N_CITIES} ciudades, recorrido óptimo (fuerza bruta): L = {optimum:.2f}")
     print(f"T0 = {T0}, T_final = {T_FINAL}\n")
 
-    # ---------- 1. Curvas de convergencia (una corrida por esquema, mismo inicio) ----------
     CURVE_BUDGET = 3000
     initial = random_tour(N_CITIES, seed=1)
     print(f"Recorrido inicial aleatorio: L = {tour_length(points, initial):.2f}")
