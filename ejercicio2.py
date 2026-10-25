@@ -95,7 +95,6 @@ if __name__ == "__main__":
         ax.set_ylim(0, W * 1.35)
         ax.set_title("Capacidad usada")
         ax.legend(loc="upper left", fontsize=8)
-        # (3) valor total
         ax = axes[row][2]
         top = max(methods[m][2] for m in labels)
         ax.bar(labels, [methods[m][2] for m in labels], color=[colors[m] for m in labels], width=0.6)
