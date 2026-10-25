@@ -5,7 +5,6 @@ import statistics
 import time
 
 def estimate_pi(seed: int, samples: int = 1_000_000) -> float:
-    """Monte Carlo: fracción de puntos aleatorios que caen dentro del cuarto de círculo unitario."""
     rng = random.Random(seed)
     inside = sum(rng.random()**2 + rng.random()**2 <= 1.0 for _ in range(samples))
     return 4 * inside / samples
@@ -16,8 +15,6 @@ def _noop(x):
 
 
 def measure(seeds: list[int], processes: int, repeats: int = 5):
-    """Tiempo real de pool.map(estimate_pi, seeds) con `processes` procesos.
-    Devuelve (mediana del tiempo en `repeats` corridas, estimación de pi)."""
     with mp.Pool(processes=processes) as pool:
         pool.map(_noop, range(processes))            
         times = []
