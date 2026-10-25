@@ -1,5 +1,4 @@
 def knapsack(values: list[int], weights: list[int], W: int):
-    """Programación dinámica (de p2.py). Devuelve (tabla, mejor valor, índices elegidos)."""
     n = len(values)
     K = [[0] * (W + 1) for _ in range(n + 1)]   
     for i in range(1, n + 1):
@@ -17,7 +16,6 @@ def knapsack(values: list[int], weights: list[int], W: int):
 
 
 def greedy(values: list[int], weights: list[int], W: int, key):
-    """Ordena los índices de los objetos con `key` y toma cada objeto que todavía quepa."""
     order = sorted(range(len(values)), key=key)
     chosen, used, total = [], 0, 0
     for i in order:
@@ -29,17 +27,14 @@ def greedy(values: list[int], weights: list[int], W: int, key):
 
 
 def greedy_ratio(values, weights, W):
-    """Clásico: mayor valor/peso primero (el signo menos invierte el orden)."""
     return greedy(values, weights, W, key=lambda i: -values[i] / weights[i])
 
 
 def greedy_lowest_weight(values, weights, W):
-    """Modificado: menor peso primero."""
     return greedy(values, weights, W, key=lambda i: weights[i])
 
 
 def solve(title, items, values, weights, W):
-    """Corre los tres métodos, imprime una tabla y devuelve los resultados para graficar."""
     print(f"\n=== {title}  (capacidad W = {W}) ===")
     print(f"{'objeto':>6s} {'peso':>5s} {'valor':>6s} {'v/w':>6s}")
     for name, w, v in zip(items, weights, values):
