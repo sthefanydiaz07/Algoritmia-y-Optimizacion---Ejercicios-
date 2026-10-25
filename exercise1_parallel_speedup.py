@@ -4,7 +4,6 @@ import random
 import statistics
 import time
 
-
 def estimate_pi(seed: int, samples: int = 1_000_000) -> float:
     """Monte Carlo: fracción de puntos aleatorios que caen dentro del cuarto de círculo unitario."""
     rng = random.Random(seed)
