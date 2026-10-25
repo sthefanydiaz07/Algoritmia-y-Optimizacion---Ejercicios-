@@ -19,7 +19,7 @@ def measure(seeds: list[int], processes: int, repeats: int = 5):
     """Tiempo real de pool.map(estimate_pi, seeds) con `processes` procesos.
     Devuelve (mediana del tiempo en `repeats` corridas, estimación de pi)."""
     with mp.Pool(processes=processes) as pool:
-        pool.map(_noop, range(processes))            # calentamiento: arranca los procesos antes de medir
+        pool.map(_noop, range(processes))            
         times = []
         for _ in range(repeats):
             t0 = time.perf_counter()
@@ -29,7 +29,7 @@ def measure(seeds: list[int], processes: int, repeats: int = 5):
 
 
 if __name__ == "__main__":
-    seeds = list(range(8))                           # 8 corridas independientes, una semilla cada una
+    seeds = list(range(8))                           
     process_counts = [1, 2, 4, 8]
     cores = os.cpu_count()
     print(f"Núcleos de CPU disponibles: {cores}")
