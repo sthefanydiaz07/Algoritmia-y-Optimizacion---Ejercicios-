@@ -66,11 +66,9 @@ def solve(title, items, values, weights, W):
 
 
 if __name__ == "__main__":
-    # Instancia 1: los objetos de p2.py
+    # Instancia 1: 
     names1, values1, weights1, W1 = ["A", "B", "C"], [60, 100, 120], [10, 20, 30], 50
     # Instancia 2: diseñada para que menor-peso-primero sea peor que valor/peso.
-    # Los dos objetos ligeros (A, B) llenan la mochila y no dejan lugar para C, el objeto
-    # pesado pero con por mucho el mejor valor/peso.
     names2, values2, weights2, W2 = ["A", "B", "C"], [2, 5, 70], [1, 2, 8], 10
 
     instances = [
@@ -85,7 +83,6 @@ if __name__ == "__main__":
     fig, axes = plt.subplots(2, 3, figsize=(13, 7))
     for row, ((title, names, values, weights, W), methods) in enumerate(zip(instances, results)):
         labels = list(methods)
-        # (1) qué objetos eligió cada método
         ax = axes[row][0]
         grid = [[1 if i in methods[m][0] else 0 for i in range(len(names))] for m in labels]
         ax.imshow(grid, cmap="Blues", vmin=0, vmax=1.6, aspect="auto")
@@ -97,7 +94,6 @@ if __name__ == "__main__":
         ax.set_yticks(range(len(labels)))
         ax.set_yticklabels(labels)
         ax.set_title("Objetos elegidos (oscuro = tomado)")
-        # (2) capacidad usada
         ax = axes[row][1]
         ax.bar(labels, [methods[m][1] for m in labels], color=[colors[m] for m in labels], width=0.6)
         ax.axhline(W, color="k", linestyle="--", linewidth=1, label=f"Capacidad W = {W}")
