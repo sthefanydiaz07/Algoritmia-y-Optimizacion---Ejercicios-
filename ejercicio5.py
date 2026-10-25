@@ -14,12 +14,10 @@ def tour_length(points, tour) -> float:
 
 
 def two_opt_move(route: list[int], i: int, k: int) -> list[int]:
-    """Invierte route[i..k]: quita las aristas (i-1, i) y (k, k+1)."""
     return route[:i] + route[i:k + 1][::-1] + route[k + 1:]
 
 
 def optimal_length(points) -> float:
-    """Fuerza bruta sobre todos los recorridos que empiezan en la ciudad 0 ((n-1)! recorridos)."""
     n = len(points)
     D = [[math.dist(a, b) for b in points] for a in points]
     best = float("inf")
@@ -33,7 +31,6 @@ def optimal_length(points) -> float:
 
 
 def mst_prim(points) -> dict[int, list[int]]:
-    """Algoritmo de Prim desde la ciudad 0; devuelve el árbol como {nodo: hijos}."""
     best = {v: (math.dist(points[0], points[v]), 0) for v in range(1, len(points))}
     children = {v: [] for v in range(len(points))}
     while best:
@@ -47,12 +44,10 @@ def mst_prim(points) -> dict[int, list[int]]:
 
 
 def preorder(children: dict[int, list[int]], root: int = 0) -> list[int]:
-    """Recorre el árbol; visitar cada ciudad una sola vez = tomar atajos en las ciudades repetidas."""
     return [root] + [c for child in children[root] for c in preorder(children, child)]
 
 
 def two_opt(points, route):
-    """Hill climbing con 2-opt (Ejercicio 3)."""
     n = len(route)
     best, best_len = route[:], tour_length(points, route)
     improved = True
@@ -79,7 +74,6 @@ def nearest_neighbour(points, start: int) -> list[int]:
 
 
 def simulated_annealing(points, initial, n_iter, seed):
-    """SA con movimientos 2-opt y enfriamiento exponencial (Ejercicio 4)."""
     n = len(initial)
     rng = random.Random(seed)
     current, best = initial[:], initial[:]
