@@ -29,7 +29,7 @@ def two_opt(points, route):
             for k in range(i + 1, n):
                 candidate = two_opt_move(best, i, k)
                 cand_len = tour_length(points, candidate)
-                if cand_len < best_len - 1e-9:      # se conserva el circuito más corto encontrado
+                if cand_len < best_len - 1e-9:      
                     best, best_len = candidate, cand_len
                     improvements += 1
                     improved = True
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
         random_start = list(range(N_CITIES))
         rng.shuffle(random_start)
-        nn_start = nearest_neighbour(points, start=rng.randrange(N_CITIES))   # primera ciudad al azar
+        nn_start = nearest_neighbour(points, start=rng.randrange(N_CITIES))   
 
         row = {}
         for label, start in [("random", random_start), ("nn", nn_start)]:
