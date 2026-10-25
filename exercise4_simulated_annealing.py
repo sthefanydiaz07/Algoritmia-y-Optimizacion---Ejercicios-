@@ -6,7 +6,7 @@ import time
 
 N_CITIES = 10
 T0, T_FINAL = 100.0, 0.01
-BUDGETS = [100, 300, 1000, 3000, 10000]        # iteraciones: enfriamiento rápido ... lento
+BUDGETS = [100, 300, 1000, 3000, 10000]        
 SEEDS = 30
 
 
@@ -43,13 +43,13 @@ def simulated_annealing(points, initial, schedule, n_iter, seed):
         T = schedule(t, n_iter)
         i = rng.randint(1, n - 2)
         k = rng.randint(i + 1, n - 1)
-        nxt = two_opt_move(current, i, k)               # RANDOM_SUCCESSOR (no el mejor)
+        nxt = two_opt_move(current, i, k)               
         nxt_len = tour_length(points, nxt)
-        delta_E = cur_len - nxt_len                     # next.VALUE - current.VALUE
+        delta_E = cur_len - nxt_len                     
         if delta_E > 0:
-            current, cur_len = nxt, nxt_len             # mejora: siempre se acepta
+            current, cur_len = nxt, nxt_len             
         elif rng.random() < math.exp(delta_E / T):
-            current, cur_len = nxt, nxt_len             # empeora: se acepta con probabilidad e^(dE/T)
+            current, cur_len = nxt, nxt_len             
         if cur_len < best_len:
             best, best_len = current[:], cur_len
         h_current.append(cur_len)
@@ -95,13 +95,11 @@ if __name__ == "__main__":
         curves[name] = (h_cur, h_best, h_temp)
         print(f"{name:12s} N = {CURVE_BUDGET}  L final = {tour_length(points, best):.2f}")
 
-    # ---------- 2. Tiempo contra calidad: presupuestos x semillas ----------
-    # Los dos esquemas se alternan dentro de cada semilla, para que ninguno quede favorecido o
-    # perjudicado por el orden de ejecución (calentamiento del procesador, otros programas...).
-    runs = {(name, n_iter): ([], []) for name in SCHEDULES for n_iter in BUDGETS}   # (tiempos, razones)
+    
+    runs = {(name, n_iter): ([], []) for name in SCHEDULES for n_iter in BUDGETS}   
     for n_iter in BUDGETS:
         for seed in range(SEEDS):
-            start = random_tour(N_CITIES, seed=1000 + seed)              # solución inicial aleatoria
+            start = random_tour(N_CITIES, seed=1000 + seed)             
             for name, schedule in SCHEDULES.items():
                 t0 = time.perf_counter()
                 best, *_ = simulated_annealing(points, start, schedule, n_iter, seed)
@@ -123,7 +121,6 @@ if __name__ == "__main__":
 
     colors = {"Lineal": "#0072B2", "Exponencial": "#D55E00"}
 
-    # ----- Figura 1: convergencia (filas: contra iteraciones / contra temperatura) -----
     fig, axes = plt.subplots(2, 2, figsize=(10, 7), sharey=True, layout="constrained")
     for col, name in enumerate(SCHEDULES):
         h_cur, h_best, h_temp = curves[name]
@@ -148,7 +145,6 @@ if __name__ == "__main__":
     fig.suptitle(f"Convergencia del recocido simulado ({CURVE_BUDGET} iteraciones)", fontsize=13)
     plt.savefig("sa_convergence.png", dpi=150)
 
-    # ----- Figura 2: tiempo de ejecución contra calidad -----
     fig, ax = plt.subplots(figsize=(8, 5.2), layout="constrained")
     for name in SCHEDULES:
         t = [s[1] for s in summary[name]]
