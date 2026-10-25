@@ -9,7 +9,6 @@ SA_ITERATIONS = 3000
 T0, T_FINAL = 100.0, 0.01
 
 
-# ---------- Utilidades de recorridos ----------
 def tour_length(points, tour) -> float:
     return sum(math.dist(points[tour[i]], points[tour[(i + 1) % len(tour)]]) for i in range(len(tour)))
 
@@ -33,14 +32,13 @@ def optimal_length(points) -> float:
     return best
 
 
-# ---------- Aproximación con MST (de p2.py) ----------
 def mst_prim(points) -> dict[int, list[int]]:
     """Algoritmo de Prim desde la ciudad 0; devuelve el árbol como {nodo: hijos}."""
     best = {v: (math.dist(points[0], points[v]), 0) for v in range(1, len(points))}
     children = {v: [] for v in range(len(points))}
     while best:
         v = min(best, key=lambda u: best[u][0])
-        children[best.pop(v)[1]].append(v)          # agrega al árbol la arista más barata
+        children[best.pop(v)[1]].append(v)          
         for u in best:
             d = math.dist(points[v], points[u])
             if d < best[u][0]:
@@ -53,7 +51,6 @@ def preorder(children: dict[int, list[int]], root: int = 0) -> list[int]:
     return [root] + [c for child in children[root] for c in preorder(children, child)]
 
 
-# ---------- Métodos de los ejercicios anteriores ----------
 def two_opt(points, route):
     """Hill climbing con 2-opt (Ejercicio 3)."""
     n = len(route)
@@ -102,7 +99,7 @@ def simulated_annealing(points, initial, n_iter, seed):
 
 
 if __name__ == "__main__":
-    rng = random.Random(2024)                      # semilla fija: los resultados se repiten
+    rng = random.Random(2024)                     
     METHODS = ["MST", "MST + 2-opt", "2-opt (inicio aleatorio)", "2-opt (vecino más cercano)",
                "Recocido simulado"]
     costs = {m: [] for m in METHODS}
@@ -140,7 +137,6 @@ if __name__ == "__main__":
 
     import matplotlib.pyplot as plt
 
-    # ----- Figura 1: razón de aproximación del recorrido del MST -----
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 4.8), gridspec_kw={"width_ratios": [2, 1]})
     x = range(1, N_INSTANCES + 1)
     ax1.plot(x, ratios["MST"], "o", color="#0072B2", markersize=4, label="MST")
@@ -167,7 +163,6 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.savefig("mst_ratio.png", dpi=150)
 
-    # ----- Figura 2: costo obtenido por cada método -----
     fig, ax = plt.subplots(figsize=(10, 5.2))
     palette = ["#0072B2", "#009E73", "#E69F00", "#D55E00", "#CC79A7"]
     box = ax.boxplot([ratios[m] for m in METHODS], tick_labels=[m.replace(" (", "\n(") for m in METHODS],
