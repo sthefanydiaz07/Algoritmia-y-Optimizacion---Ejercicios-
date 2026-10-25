@@ -1,7 +1,7 @@
 # Algorithms & Optimization: Exercises 1 to 5
 
 - **Repositorio:** https://github.com/sthefanydiaz07/Algoritmia-y-Optimizacion---Ejercicios-
-- **Video (máx. 8 min):** `<PEGA AQUÍ EL ENLACE DEL VIDEO>`
+- **Video (máx. 8 min):** `https://youtu.be/VsBMZDh1SHU?si=6BOw_Mz1McSyn5Ck`
 
 Todos los scripts están basados en `p2.py`, son independientes entre sí y usan semillas fijas, así que los resultados se repiten en cada corrida (solo cambian los tiempos en milisegundos).
 
@@ -18,7 +18,7 @@ python ejercicio4.py
 python ejercicio5.py
 ```
 
-Cada script imprime sus resultados, guarda sus gráficas como `.png` en la carpeta donde se ejecuta y las muestra en pantalla (cierra la ventana para que termine).
+Cada script imprime sus resultados, guarda sus gráficas como `.png` en la carpeta donde se ejecuta y las muestra en pantalla.
 
 | Ejercicio | Script | Gráficas generadas |
 |---|---|---|
@@ -148,6 +148,3 @@ Aproximación basada en el MST (Prim y recorrido en preorden con atajos, de `p2.
 
 ---
 
-### Nota sobre las mediciones del Ejercicio 1
-
-La tabla del Ejercicio 1 viene de una máquina con 4 núcleos lógicos. Los tiempos y el speedup dependen del equipo y de los programas abiertos, por lo que al correr el script en otra computadora los números cambiarán (con más núcleos, el speedup seguirá creciendo hasta aproximadamente el número de núcleos físicos). Los resultados de los Ejercicios 2 a 5 son deterministas, salvo los tiempos en milisegundos.
