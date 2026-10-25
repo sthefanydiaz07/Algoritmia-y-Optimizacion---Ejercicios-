@@ -46,8 +46,6 @@ if __name__ == "__main__":
         speedup[p] = times[1] / times[p]
         print(f"{p:>8d} {times[p]:>11.3f} {speedup[p]:>7.2f}x {p:>5d}x {speedup[p] / p:>10.0%}")
 
-    # matplotlib se importa aquí (y no arriba) porque en Windows cada proceso hijo vuelve a
-    # importar este archivo, y importar matplotlib en cada uno distorsionaría las mediciones.
     import matplotlib.pyplot as plt
 
     fig, ax = plt.subplots(figsize=(7, 4.8))
