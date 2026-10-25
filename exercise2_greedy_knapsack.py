@@ -1,14 +1,14 @@
 def knapsack(values: list[int], weights: list[int], W: int):
     """Programación dinámica (de p2.py). Devuelve (tabla, mejor valor, índices elegidos)."""
     n = len(values)
-    K = [[0] * (W + 1) for _ in range(n + 1)]   # K[i][c]: mejor valor con los objetos 1..i y capacidad c
+    K = [[0] * (W + 1) for _ in range(n + 1)]   
     for i in range(1, n + 1):
         v, w = values[i - 1], weights[i - 1]
         for c in range(W + 1):
-            K[i][c] = K[i - 1][c]                                   # no tomar el objeto i
+            K[i][c] = K[i - 1][c]                                  
             if w <= c:
-                K[i][c] = max(K[i][c], v + K[i - 1][c - w])         # tomar el objeto i
-    chosen, c = [], W                           # recorrer la tabla hacia atrás
+                K[i][c] = max(K[i][c], v + K[i - 1][c - w])       
+    chosen, c = [], W                           
     for i in range(n, 0, -1):
         if K[i][c] != K[i - 1][c]:
             chosen.append(i - 1)
@@ -66,9 +66,7 @@ def solve(title, items, values, weights, W):
 
 
 if __name__ == "__main__":
-    # Instancia 1: 
     names1, values1, weights1, W1 = ["A", "B", "C"], [60, 100, 120], [10, 20, 30], 50
-    # Instancia 2: diseñada para que menor-peso-primero sea peor que valor/peso.
     names2, values2, weights2, W2 = ["A", "B", "C"], [2, 5, 70], [1, 2, 8], 10
 
     instances = [
