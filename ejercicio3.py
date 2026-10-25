@@ -13,12 +13,10 @@ def tour_length(points, route) -> float:
 
 
 def two_opt_move(route: list[int], i: int, k: int) -> list[int]:
-    """Invierte route[i..k]: quita las aristas (i-1, i) y (k, k+1)."""
     return route[:i] + route[i:k + 1][::-1] + route[k + 1:]
 
 
 def two_opt(points, route):
-    """Hill climbing con 2-opt. Devuelve (óptimo local, número de mejoras)."""
     n = len(route)
     best = route[:]
     best_len = tour_length(points, best)
@@ -37,7 +35,6 @@ def two_opt(points, route):
 
 
 def nearest_neighbour(points, start: int) -> list[int]:
-    """Desde `start`, ir siempre a la ciudad más cercana que todavía no se ha visitado."""
     route, pending = [start], set(range(len(points))) - {start}
     while pending:
         last = route[-1]
@@ -48,7 +45,6 @@ def nearest_neighbour(points, start: int) -> list[int]:
 
 
 def optimal_length(points) -> float:
-    """Fuerza bruta sobre todos los recorridos que empiezan en la ciudad 0 ((n-1)! recorridos)."""
     n = len(points)
     D = [[math.dist(a, b) for b in points] for a in points]
     best = float("inf")
